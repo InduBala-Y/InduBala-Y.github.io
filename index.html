@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr Indu Bala | Adelaide University</title>
+<meta name="description" content="Dr Indu Bala, Lecturer in Computer Science at Adelaide University. Optimisation, stochastic modelling and trustworthy AI for healthcare and infrastructure.">
+<meta property="og:title" content="Dr Indu Bala">
+<meta property="og:description" content="Applied mathematician working on optimisation and trustworthy AI for high-stakes decisions.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%231D6A57'/><circle cx='20' cy='13' r='4' fill='none' stroke='%23F2C36B' stroke-width='2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Schibsted+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F8F7; --wash:#EAF0ED; --ink:#17212B; --muted:#56626C;
+  --rule:#D3DBD8; --accent:#1D6A57; --best:#B97F14;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#10171C; --wash:#15212A; --ink:#E3E9E7; --muted:#9AA8A4;
+    --rule:#27343C; --accent:#6CC3A8; --best:#E2AE4A;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.68 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:.5rem 1rem;z-index:20}
+.skip:focus{left:1rem}
+
+/* header */
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;align-items:center;gap:2rem;height:3.75rem}
+.brand{font:700 1rem/1 var(--sans);color:var(--ink);text-decoration:none;white-space:nowrap}
+nav.main{margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0}
+nav.main a{font:500 .95rem/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;padding:.4rem 0}
+nav.main a:hover,nav.main a[aria-current="true"]{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:3.5rem;align-items:center;padding:4.5rem 0 4rem}
+.portrait{width:5.5rem;height:5.5rem;margin:0 0 1.75rem;border-radius:50%;overflow:hidden;background:var(--accent);position:relative}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait span{display:none;place-items:center;width:100%;height:100%;font:600 1.6rem/1 var(--sans);color:var(--paper)}
+.portrait.no-photo img{display:none}
+.portrait.no-photo span{display:grid}
+h1{font:700 clamp(2.6rem,6vw,4.2rem)/1.02 var(--sans);letter-spacing:-.025em;margin:0 0 .6rem}
+.role{font:500 1.1rem/1.4 var(--sans);color:var(--muted);margin:0 0 1.6rem}
+.lead{font-size:1.2rem;line-height:1.6;margin:0 0 1.9rem;max-width:34rem}
+.links{display:flex;flex-wrap:wrap;gap:.6rem}
+.links a{font:500 .95rem/1 var(--sans);text-decoration:none;color:var(--ink);border:1px solid var(--rule);padding:.6rem .9rem;border-radius:999px;background:var(--paper)}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.links a.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.links a.primary:hover{color:var(--paper);filter:brightness(1.08)}
+
+.swarm{margin:0}
+.swarm .stage{position:relative;aspect-ratio:5/4;background:var(--wash);border-radius:6px;overflow:hidden}
+.swarm canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.swarm figcaption{display:flex;gap:1rem;align-items:flex-start;justify-content:space-between;margin-top:.8rem;font-size:.92rem;line-height:1.5;color:var(--muted)}
+.swarm figcaption p{margin:0;max-width:32rem}
+.swatch{display:inline-block;width:.7em;height:.7em;border:2px solid var(--best);border-radius:50%;vertical-align:-.05em}
+button.rerun{flex:none;font:500 .9rem/1 var(--sans);color:var(--ink);background:none;border:1px solid var(--rule);border-radius:999px;padding:.55rem .85rem;cursor:pointer}
+button.rerun:hover{border-color:var(--accent);color:var(--accent)}
+
+/* sections */
+section.sec{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:2.5rem;padding:3.75rem 0;border-top:1px solid var(--rule)}
+section.sec > h2{font:600 1.2rem/1.3 var(--sans);margin:0;align-self:start;position:sticky;top:5.5rem}
+.body{max-width:46rem}
+.body > p:first-child{margin-top:0}
+.body p{margin:0 0 1.1rem}
+h3{font:600 1.08rem/1.35 var(--sans);margin:0 0 .45rem}
+
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.25rem 2.5rem}
+.themes p{margin:0;font-size:1rem}
+.themes .tags{margin-top:.6rem;font-size:.9rem;color:var(--muted)}
+
+/* timelines */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--rule)}
+.tl li:last-child{border-bottom:0}
+.tl .yr{font:500 .95rem/1.68 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.tl small{display:block;color:var(--muted);font-size:.92rem}
+.sub{margin:2.25rem 0 .75rem}
+
+/* publications */
+.pubtools{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center;margin-bottom:1.75rem}
+.filters{display:flex;flex-wrap:wrap;gap:.4rem}
+.filters button{font:500 .9rem/1 var(--sans);color:var(--muted);background:none;border:1px solid var(--rule);border-radius:999px;padding:.5rem .8rem;cursor:pointer}
+.filters button:hover{color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.search{flex:1 1 12rem;min-width:0}
+.search input{width:100%;font:400 .95rem/1.2 var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:.55rem .75rem}
+.search input::placeholder{color:var(--muted)}
+.count{font:500 .9rem/1.4 var(--sans);color:var(--muted);margin:0 0 1.25rem}
+.year{font:600 1.05rem/1 var(--sans);color:var(--muted);margin:2rem 0 .5rem;font-variant-numeric:tabular-nums}
+.year:first-of-type{margin-top:0}
+ol.pubs{list-style:none;margin:0;padding:0}
+ol.pubs li{padding:.85rem 0;border-bottom:1px solid var(--rule)}
+ol.pubs li:last-child{border-bottom:0}
+.pt{font-weight:500;display:block}
+.pa{display:block;font-size:.95rem;color:var(--muted)}
+.pa strong{color:var(--ink);font-weight:500}
+.pv{display:block;font-size:.95rem}
+.pv em{font-style:italic}
+.pl{display:inline-flex;gap:.9rem;margin-top:.25rem;font:500 .85rem/1.4 var(--sans)}
+.kind{font:500 .8rem/1 var(--sans);color:var(--accent);border:1px solid currentColor;border-radius:999px;padding:.2rem .5rem;margin-left:.4rem;vertical-align:.1em;white-space:nowrap}
+.empty{color:var(--muted)}
+.note{font-size:.95rem;color:var(--muted);margin-top:1.75rem}
+
+/* footer */
+footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;font:400 .9rem/1.5 var(--sans);color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0}
+  section.sec{grid-template-columns:1fr;gap:1.25rem;padding:3rem 0}
+  section.sec > h2{position:static}
+  .themes{grid-template-columns:1fr;gap:1.75rem}
+}
+@media (max-width:560px){
+  header.top .wrap{gap:1rem}
+  .brand{display:none}
+  nav.main{margin-left:0}
+  .tl li{grid-template-columns:1fr;gap:0}
+  .swarm figcaption{flex-direction:column}
+}
+@media print{
+  header.top,.swarm,.pubtools,.links{display:none}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#about">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Dr Indu Bala</a>
+    <nav class="main" aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#recognition">Recognition</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#service">Talks &amp; service</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <div>
+      <figure class="portrait" id="portrait">
+        <img src="images/profile.jpg" alt="Portrait of Indu Bala" onerror="document.getElementById('portrait').classList.add('no-photo')">
+        <span aria-hidden="true">IB</span>
+      </figure>
+      <h1>Indu Bala</h1>
+      <p class="role">Lecturer, School of Computer Science and Information Technology, Adelaide University</p>
+      <p class="lead">I’m an applied mathematician working on optimisation and trustworthy AI. I design stochastic and evolutionary algorithms, and combine them with machine learning and language models to support high-stakes decisions in healthcare and infrastructure.</p>
+      <div class="links">
+        <a class="primary" href="mailto:indu.bala@adelaide.edu.au">Email me</a>
+        <a href="https://scholar.google.com.au/citations?user=BtNMYvgAAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://orcid.org/0000-0001-8016-9364">ORCID</a>
+        <a href="https://www.linkedin.com/in/indu-bala-00279719">LinkedIn</a>
+      </div>
+    </div>
+
+    <figure class="swarm">
+      <div class="stage"><canvas id="swarm" role="img" aria-label="Animation of a particle swarm moving across a contour map and converging on its lowest point"></canvas></div>
+      <figcaption>
+        <p>A particle swarm with ring topology searching a multimodal landscape, the family of methods behind my OrPSOC and OPSO variants. The <span class="swatch" aria-hidden="true"></span> ring marks the best point found so far.</p>
+        <button class="rerun" id="rerun" type="button">Run the swarm again</button>
+      </figcaption>
+    </figure>
+  </div>
+
+  <section class="sec" id="about" aria-labelledby="h-about">
+    <h2 id="h-about">About</h2>
+    <div class="body">
+      <p>I am a Lecturer in the School of Computer Science and Information Technology at Adelaide University and a member of the Australian Institute for Machine Learning (AIML). My work sits between mathematics and computing: I build optimisation and modelling methods with clear theoretical footing, then take them into messy real-world problems where decisions carry consequences.</p>
+      <p>From 2022 to 2024 I was a postdoctoral researcher at the University of Adelaide on an NHMRC-funded project improving the safety of implantable medical devices, where I developed machine learning and NLP methods for adverse-event reports. Before that I was an Assistant Professor in the Department of Mathematics at Presidency University, India.</p>
+      <p>I hold a PhD in Applied Mathematical Sciences from The NorthCap University (2021), an industry-funded project on comprehensive learning gravitational search algorithms, along with an MPhil and MSc in Applied Mathematics. I collaborate with researchers in Korea, India, the Netherlands, Malaysia and Spain.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="research" aria-labelledby="h-research">
+    <h2 id="h-research">Research</h2>
+    <div class="body">
+      <div class="themes">
+        <div>
+          <h3>Stochastic and evolutionary optimisation</h3>
+          <p>New swarm and physics-inspired algorithms for hard, multimodal problems, with attention to why they work: orthogonal initialisation, crossover and mutation operators, niching, and explainable search behaviour.</p>
+          <p class="tags">OrPSOC, OPSO, CLGSA, AEFA, CMA-ES variants, LLMs for algorithm design</p>
+        </div>
+        <div>
+          <h3>Trustworthy, uncertainty-aware AI</h3>
+          <p>Methods that tell decision-makers how far to trust a prediction, including conformal prediction and robustness testing of language models used in clinical and safety settings.</p>
+          <p class="tags">Conformal prediction, LLM robustness, explainable ML</p>
+        </div>
+        <div>
+          <h3>Clinical NLP and pharmacovigilance</h3>
+          <p>Detecting and explaining adverse events in medical device and drug-safety reports, from classical machine learning to retrieval-augmented generation over regulatory databases.</p>
+          <p class="tags">MAUDE, FAERS, mesh implants, RAG, sentiment and topic modelling</p>
+        </div>
+        <div>
+          <h3>Scientific ML and infrastructure</h3>
+          <p>Physics-informed neural networks for differential equations, and optimisation and forecasting for water distribution networks and power systems.</p>
+          <p class="tags">PINNs, water distribution design, demand forecasting, reactive power dispatch</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="publications" aria-labelledby="h-pubs">
+    <h2 id="h-pubs">Publications</h2>
+    <div class="body">
+      <div class="pubtools">
+        <div class="filters" role="group" aria-label="Filter by publication type" id="filters"></div>
+        <label class="search"><span class="skip">Search publications</span><input type="search" id="q" placeholder="Search titles, authors, venues"></label>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div id="publist"></div>
+      <p class="note">For citation counts and the most current list, see my <a href="https://scholar.google.com.au/citations?user=BtNMYvgAAAAJ&amp;hl=en">Google Scholar profile</a>.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="recognition" aria-labelledby="h-rec">
+    <h2 id="h-rec">Recognition</h2>
+    <div class="body">
+      <ul class="tl">
+        <li><span class="yr">2026</span><span>Finalist, Women in AI APAC Awards, Foundational AI category</span></li>
+        <li><span class="yr">2026</span><span>Finalist, Women in Innovation Awards (South Australia), Maths and Data category</span></li>
+        <li><span class="yr">2025</span><span>STEM Trailblazer Award<small>Australia Today International Women’s Day Awards</small></span></li>
+        <li><span class="yr">2025</span><span>Early and Mid-Career Researcher grant<small>Faculty of Sciences, Engineering and Technology, University of Adelaide</small></span></li>
+        <li><span class="yr">2024</span><span>Data Science Pioneer Award<small>Women of Colour in STEM Awards</small></span></li>
+        <li><span class="yr">2024</span><span>Australia–India Women Researchers’ Exchange Fellowship<small>Collaboration with NIT Jalandhar on optimising urban rainwater harvesting</small></span></li>
+        <li><span class="yr">2024</span><span>WIMSNG conference travel grant</span></li>
+        <li><span class="yr">2023</span><span>CASS Foundation travel grant</span></li>
+        <li><span class="yr">2023</span><span>UN Datathon travel grant</span></li>
+      </ul>
+      <h3 class="sub">In the media</h3>
+      <ul class="tl">
+        <li><span class="yr">Profile</span><span>Feature on my research and story in <em>Magnify Me</em>, the STEM Sisters monthly magazine</span></li>
+        <li><span class="yr">Interview</span><span>Australia India Institute, on working in Australia’s STEM sector and supporting women in AI</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="teaching" aria-labelledby="h-teach">
+    <h2 id="h-teach">Teaching</h2>
+    <div class="body">
+      <p>I coordinate and teach machine learning and data science courses at undergraduate and postgraduate level, including a third-year machine learning course of around 300 students.</p>
+      <ul class="tl">
+        <li><span class="yr">UG</span><span>Using Machine Learning Tools</span></li>
+        <li><span class="yr">UG</span><span>COMP1045 Applications of Machine Learning</span></li>
+        <li><span class="yr">PG</span><span>COMP6005 Consulting and AI ethics</span></li>
+        <li><span class="yr">PG</span><span>Master of Data Science and Master of Computer Science research projects</span></li>
+        <li><span class="yr">PG</span><span>DATA6000 Capstone: Industry Case Studies<small>Kaplan Business School</small></span></li>
+      </ul>
+      <h3 class="sub">Research supervision</h3>
+      <ul class="tl">
+        <li><span class="yr">PhD</span><span>Subarna Khanra: physics-informed neural networks for differential equations in complex physical systems (external supervisor, SLIET)</span></li>
+        <li><span class="yr">Master</span><span>Paul Lucena: dynamic knowledge structures with transformer-based embeddings</span></li>
+        <li><span class="yr">Master</span><span>Yige Wang: adverse-event detection and advisory systems for the FDA database using ML and RAG</span></li>
+        <li><span class="yr">Intern</span><span>Yu-Chieh Liao: AI-driven text analytics for early detection of mental health risks</span></li>
+        <li><span class="yr">Summer</span><span>Henry Philip: multi-objective AutoML for neural architecture optimisation (2024–25)</span></li>
+      </ul>
+      <p class="note">I welcome enquiries from prospective HDR and Master’s students interested in optimisation, trustworthy AI or clinical NLP. Please email me with a short description of your background and interests.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="service" aria-labelledby="h-service">
+    <h2 id="h-service">Talks &amp; service</h2>
+    <div class="body">
+      <h3>Invited talks</h3>
+      <ul class="tl">
+        <li><span class="yr">2027</span><span>ASCE Forensic Engineering Conference (invited, March 2027)</span></li>
+        <li><span class="yr">2025</span><span>32nd National Symposium on Mathematical Sciences (SKSM32), Cyberjaya, Malaysia</span></li>
+        <li><span class="yr">2025</span><span>3rd International Conference on Recent Trends in Mathematical Sciences (ICRTMS-2025), Shimla, India</span></li>
+        <li><span class="yr">2025</span><span>Toward transparent evolution: explainability in stochastic and machine learning algorithms<small>National Conference on Mathematical and Statistical Modelling, Simulation and Optimization of Energy Systems, University of Bengkulu, Indonesia</small></span></li>
+        <li><span class="yr">2025</span><span>A synergistic framework of evolutionary algorithms and explainable machine learning<small>Summer School on Evolutionary Algorithms and Machine Learning, NIT Jalandhar, India</small></span></li>
+        <li><span class="yr">2025</span><span>Expert lectures on optimisation in water networks (NIT Jalandhar) and mathematics in machine learning (SLIET Longowal)</span></li>
+      </ul>
+      <h3 class="sub">Service</h3>
+      <ul class="tl">
+        <li><span class="yr">2026</span><span>Reviewer, GenAI4Health Workshop, NeurIPS 2026</span></li>
+        <li><span class="yr">2025</span><span>International Advisory Committee, rTIME-2025</span></li>
+        <li><span class="yr">2025</span><span>Technical Committee, Summer School on Evolutionary Algorithms and Machine Learning, NIT Jalandhar</span></li>
+        <li><span class="yr">2025</span><span>Session chair, Mathematical and Statistical Modelling of Energy Systems conference, Indonesia</span></li>
+        <li><span class="yr">2024</span><span>Session chair, ANZIAM 2024</span></li>
+        <li><span class="yr">2022–</span><span>Editorial board, <em>Medicon Medical Sciences</em></span></li>
+        <li><span class="yr">Member</span><span>Association for Computing Machinery (ACM), active in the GECCO community</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="contact" aria-labelledby="h-contact">
+    <h2 id="h-contact">Contact</h2>
+    <div class="body">
+      <p><a href="mailto:indu.bala@adelaide.edu.au">indu.bala@adelaide.edu.au</a></p>
+      <p>School of Computer Science and Information Technology<br>Adelaide University<br>Adelaide, South Australia 5005</p>
+      <p>Also on <a href="https://researchers.adelaide.edu.au/profile/indu.bala">Adelaide University Researcher Profiles</a>, <a href="https://www.researchgate.net/profile/Indu-Bala-9">ResearchGate</a> and <a href="https://www.scopus.com/authid/detail.url?authorId=57203859973">Scopus</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Indu Bala</span>
+    <span>Last updated October 2026</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Publications ----------
+   To add a paper, copy one object below and edit it.
+   type: "journal" | "conference" | "chapter" | "preprint" | "thesis"
+   Write your own name exactly as "I. Bala" so it is highlighted. */
+const PUBS = [
+  {type:"journal",year:2026,authors:"D. Chauhan, B. Dutta, I. Bala, N. van Stein, T. Bäck, A. Yadav",title:"Large language models and evolutionary computation: A critical review of bidirectional interaction, automated algorithm design, and co-adaptive systems",venue:"Computer Science Review",details:"63 (2027)",doi:"10.1016/j.cosrev.2026.101050",arxiv:"2505.15741"},
+  {type:"journal",year:2026,authors:"S. Khanra, V. K. Kukreja, I. Bala",title:"Physics-informed neural networks for differential equation solutions: A comprehensive review",venue:"Neurocomputing",details:"680, 133317",doi:"10.1016/j.neucom.2026.133317"},
+  {type:"journal",year:2026,authors:"T.-L. Kelly, T. Stanford, C. Murray, L. Mitchell, I. Bala, N. Pratt, T. South, M. Gillam",title:"Signal detection of adverse events in medical devices using natural language processing: a case study in pelvic mesh",venue:"Scientific Reports",details:"16(1)",doi:"10.1038/s41598-026-50950-z"},
+  {type:"conference",year:2026,authors:"S. R. Sharma, L. Mitchell, B. Singh, I. Bala",title:"A unified multi-objective particle swarm optimization framework for prompt and hyperparameter optimization in large language models",venue:"GECCO ’26 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 317–320, ACM",doi:"10.1145/3795101.3805410"},
+  {type:"chapter",year:2026,authors:"I. Bala, L. Mitchell, M. H. Gillam",title:"Analysis of voluntarily reported data post mesh implantation for detecting public emotion and identifying concern reports",venue:"Communications in Computer and Information Science",details:"vol. 2405, pp. 421–433, Springer (forthcoming)",doi:"10.1007/978-3-032-30990-7_31",arxiv:"2509.04517"},
+  {type:"chapter",year:2026,authors:"I. Bala, D. Chauhan",title:"Performance evaluation of the grey wolf optimizer against advanced differential evolution variants",venue:"Grey Wolf Optimizer: A Pack of Solutions for Your Optimization Problems (S. Mirjalili, ed.)",details:"pp. 313–326, Morgan Kaufmann",doi:"10.1016/B978-0-443-36624-6.00039-1"},
+  {type:"chapter",year:2026,authors:"D. S. Brar, I. Bala, B. Singh, V. Nanda",title:"Adaptive augmentation and synthetic image generation (AAg-SiG) framework for food applications",venue:"Lecture Notes in Networks and Systems",details:"vol. 1929, pp. 155–167, Springer",doi:"10.1007/978-3-032-22911-3_12"},
+  {type:"journal",year:2025,authors:"I. Bala, W. Karunarathne, L. Mitchell",title:"Optimizing feature selection by enhancing particle swarm optimization with orthogonal initialization and crossover operator",venue:"Computers, Materials & Continua",details:"84(1), 727–744",doi:"10.32604/cmc.2025.065706"},
+  {type:"journal",year:2025,authors:"I. Bala, E. Sharma, L. Mitchell",title:"Clinical insight from mesh implant narratives using zero-shot retrieval-augmented generation approaches",venue:"Artificial Intelligence Surgery",details:"5(4), 476–488",doi:"10.20517/ais.2025.44"},
+  {type:"journal",year:2025,authors:"A. Aggarwal, E. Awasthi, D. Kukreja, J. Kedia, I. Bala",title:"Modified moth flame optimization and logistic chaotic map integration for image encryption",venue:"International Journal of System Assurance Engineering and Management",details:"16(2), 785–804",doi:"10.1007/s13198-024-02669-1"},
+  {type:"conference",year:2025,authors:"S. Liu, S. Zhang, I. Bala",title:"Robust or suggestible? Exploring non-clinical induction in LLM drug-safety decisions",venue:"NeurIPS 2025 Workshop",details:"",url:"https://arxiv.org/abs/2510.13931"},
+  {type:"conference",year:2025,authors:"N. Gupta, I. Bala, B. Dutta, L. Martínez, A. Yadav",title:"Enhancing explainability and reliable decision-making in particle swarm optimization through communication topologies",venue:"GECCO ’25 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 955–958, ACM",doi:"10.1145/3712255.3726658",arxiv:"2504.12803"},
+  {type:"conference",year:2025,authors:"A. Bairagi, A. Sayal, S. Singh, A. Gupta, I. Bala, M. Gokhale, D. Dubey",title:"A hybrid machine learning and deep learning framework for early detection of depression from social media text",venue:"International Conference on Electrical Communication and Computing Technologies (iCONECCT)",details:"IEEE",doi:"10.1109/iCONECCT67014.2025.11470207"},
+  {type:"journal",year:2024,authors:"I. Bala, T.-L. Kelly, T. Stanford, M. H. Gillam, L. Mitchell",title:"Machine learning-based analysis of adverse events in mesh implant surgery reports",venue:"Social Network Analysis and Mining",details:"14(1), 63",doi:"10.1007/s13278-024-01229-6"},
+  {type:"journal",year:2024,authors:"I. Bala, A. Yadav, J. H. Kim",title:"Optimization for cost-effective design of water distribution networks: a comprehensive learning approach",venue:"Evolutionary Intelligence",details:"17(4), 2981–3013",doi:"10.1007/s12065-024-00922-x"},
+  {type:"journal",year:2024,authors:"I. Bala, T.-L. Kelly, R. Lim, M. H. Gillam, L. Mitchell",title:"An effective approach for multiclass classification of adverse events using machine learning",venue:"Journal of Computational and Cognitive Engineering",details:"3(3), 226–239",doi:"10.47852/bonviewjcce32021924"},
+  {type:"journal",year:2024,authors:"I. Bala, L. Mitchell",title:"Thematic exploration of educational research after the COVID pandemic through topic modelling",venue:"Journal of Applied Learning & Teaching",details:"7(1), 26–34",doi:"10.37074/jalt.2024.7.1.40"},
+  {type:"journal",year:2024,authors:"T. N. Le, M. Afshar Ali, S. Gadzhanova, R. Lim, I. Bala, K. N. Bogale, M. Gillam",title:"Hernia repair prevalence by age and gender among the Australian adult population from 2017 to 2021",venue:"Critical Public Health",details:"34(1), 1–11",doi:"10.1080/09581596.2024.2351981"},
+  {type:"conference",year:2024,authors:"I. Bala, D. Chauhan, L. Mitchell",title:"Orthogonally initiated particle swarm optimization with advanced mutation for real-parameter optimization",venue:"GECCO ’24 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 735–738, ACM",doi:"10.1145/3638530.3654214"},
+  {type:"preprint",year:2024,authors:"W. Karunarathne, I. Bala, D. Chauhan, M. Roughan, L. Mitchell",title:"Modified CMA-ES algorithm for multi-modal optimization: incorporating niching strategies and dynamic adaptation mechanism",venue:"arXiv preprint",details:"arXiv:2407.00939",url:"https://arxiv.org/abs/2407.00939"},
+  {type:"journal",year:2023,authors:"I. Bala",title:"Natural language processing in medical science and healthcare",venue:"Medicon Medical Sciences",details:"4(1), 1–2",doi:"10.55162/mcms.04.088"},
+  {type:"conference",year:2023,authors:"I. Bala, A. Yadav",title:"Optimizing reactive power of IEEE-14 bus system using artificial electric field algorithm",venue:"Congress on Intelligent Systems, Lecture Notes in Networks and Systems",details:"vol. 613, pp. 651–665, Springer",doi:"10.1007/978-981-19-9379-4_47"},
+  {type:"journal",year:2022,authors:"I. Bala, A. Yadav",title:"Niching comprehensive learning gravitational search algorithm for multimodal optimization problems",venue:"Evolutionary Intelligence",details:"15(1), 695–721",doi:"10.1007/s12065-020-00547-w"},
+  {type:"thesis",year:2021,authors:"I. Bala",title:"A comprehensive learning gravitational search algorithm and its applications",venue:"PhD thesis, The NorthCap University",details:"",url:"https://shodhganga.inflibnet.ac.in/handle/10603/312849"},
+  {type:"journal",year:2020,authors:"I. Bala, A. Yadav",title:"Comprehensive learning gravitational search algorithm for global optimization of multimodal functions",venue:"Neural Computing and Applications",details:"32(11), 7347–7382",doi:"10.1007/s00521-019-04250-5"},
+  {type:"conference",year:2020,authors:"I. Bala, A. Yadav",title:"Optimal reactive power dispatch using gravitational search algorithm to solve IEEE-14 bus system",venue:"Communication and Intelligent Systems (ICCIS 2019)",details:"pp. 463–473, Springer",doi:"10.1007/978-981-15-3325-9_36"},
+  {type:"journal",year:2019,authors:"I. Bala, A. Malhotra",title:"Fuzzy classification with comprehensive learning gravitational search algorithm in breast tumor detection",venue:"International Journal of Recent Technology and Engineering",details:"8(2), 2688–2694",doi:"10.35940/ijrte.B2801.078219"},
+  {type:"conference",year:2018,authors:"I. Bala, A. Yadav",title:"Gravitational search algorithm: a state-of-the-art review",venue:"Harmony Search and Nature Inspired Optimization Algorithms (ICHSA 2018), Advances in Intelligent Systems and Computing",details:"vol. 741, pp. 27–37, Springer",doi:"10.1007/978-981-13-0761-4_3"}
+];
+
+const TYPES = [
+  ["all","All"],["journal","Journal articles"],["conference","Conference papers"],
+  ["chapter","Book chapters"],["preprint","Preprints and thesis"]
+];
+const KIND = {journal:"Journal",conference:"Conference",chapter:"Chapter",preprint:"Preprint",thesis:"Thesis"};
+let activeType = "all";
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const me = a => esc(a).replace(/I\. Bala/g,"<strong>I. Bala</strong>");
+
+function renderFilters(){
+  const box = document.getElementById("filters");
+  box.innerHTML = TYPES.map(([k,label]) =>
+    `<button type="button" data-type="${k}" aria-pressed="${k===activeType}">${label}</button>`).join("");
+  box.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    activeType = b.dataset.type; renderFilters(); renderPubs();
+  }));
+}
+
+function renderPubs(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const list = PUBS.filter(p => {
+    const typeOk = activeType==="all" || p.type===activeType || (activeType==="preprint" && p.type==="thesis");
+    const text = (p.title+" "+p.authors+" "+p.venue+" "+p.year).toLowerCase();
+    return typeOk && (!q || text.includes(q));
+  }).sort((a,b) => b.year - a.year);
+
+  document.getElementById("count").textContent =
+    list.length === PUBS.length ? `${PUBS.length} publications` : `Showing ${list.length} of ${PUBS.length} publications`;
+
+  const out = document.getElementById("publist");
+  if(!list.length){ out.innerHTML = `<p class="empty">No publications match that search. Try a shorter term or choose All.</p>`; return; }
+
+  let html = "", year = null;
+  list.forEach(p => {
+    if(p.year !== year){
+      if(year !== null) html += "</ol>";
+      year = p.year;
+      html += `<h3 class="year">${year}</h3><ol class="pubs">`;
+    }
+    const links = [];
+    if(p.doi) links.push(`<a href="https://doi.org/${esc(p.doi)}">DOI</a>`);
+    if(p.arxiv) links.push(`<a href="https://arxiv.org/abs/${esc(p.arxiv)}">arXiv</a>`);
+    if(p.url) links.push(`<a href="${esc(p.url)}">${p.url.includes("arxiv.org") ? "arXiv" : p.type==="thesis" ? "Full text" : "Link"}</a>`);
+    const kind = activeType==="all" ? `<span class="kind">${KIND[p.type]}</span>` : "";
+    html += `<li>
+      <span class="pt">${esc(p.title)}${kind}</span>
+      <span class="pa">${me(p.authors)}</span>
+      <span class="pv"><em>${esc(p.venue)}</em>${p.details ? ", "+esc(p.details) : ""}</span>
+      ${links.length ? `<span class="pl">${links.join("")}</span>` : ""}
+    </li>`;
+  });
+  html += "</ol>";
+  out.innerHTML = html;
+}
+
+renderFilters(); renderPubs();
+document.getElementById("q").addEventListener("input", renderPubs);
+
+/* ---------- Active section in nav ---------- */
+(() => {
+  const links = [...document.querySelectorAll("nav.main a")];
+  const map = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(l => l.removeAttribute("aria-current"));
+        const a = map.get(e.target.id); if(a) a.setAttribute("aria-current","true");
+      }
+    });
+  }, {rootMargin:"-40% 0px -55% 0px"});
+  document.querySelectorAll("section.sec").forEach(s => io.observe(s));
+})();
+
+/* ---------- Particle swarm hero ---------- */
+(() => {
+  const canvas = document.getElementById("swarm");
+  const ctx = canvas.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const wells = [
+    {x: 0.46, y:-0.32, d:1.10, s:0.18},
+    {x:-0.58, y: 0.42, d:0.80, s:0.22},
+    {x:-0.30, y:-0.58, d:0.72, s:0.17},
+    {x: 0.62, y: 0.55, d:0.74, s:0.20},
+    {x: 0.02, y: 0.12, d:0.52, s:0.26},
+    {x:-0.92, y:-0.18, d:0.55, s:0.14},
+    {x: 1.05, y: 0.02, d:0.48, s:0.16}
+  ];
+  const f = (x,y) => {
+    let v = 0.16*(x*x + y*y) + 0.035*Math.sin(7*x)*Math.cos(6*y);
+    for(const w of wells){ const dx=x-w.x, dy=y-w.y; v -= w.d*Math.exp(-(dx*dx+dy*dy)/(2*w.s*w.s)); }
+    return v;
+  };
+
+  let W=0,H=0,dpr=1,xSpan=2,ySpan=2,contours=null,colors={};
+  const toPx = (x,y) => [ (x + xSpan/2)/xSpan*W, (1 - (y + ySpan/2)/ySpan)*H ];
+
+  function readColors(){
+    const cs = getComputedStyle(document.documentElement);
+    colors = {accent:cs.getPropertyValue("--accent").trim(), ink:cs.getPropertyValue("--ink").trim(), best:cs.getPropertyValue("--best").trim()};
+  }
+  function hexToRgb(h){ h=h.replace("#",""); if(h.length===3) h=h.split("").map(c=>c+c).join(""); const n=parseInt(h,16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+
+  function buildContours(){
+    const pw = Math.round(W*dpr), ph = Math.round(H*dpr);
+    const vals = new Float32Array((pw+1)*(ph+1));
+    let mn=Infinity, mx=-Infinity;
+    for(let j=0;j<=ph;j++) for(let i=0;i<=pw;i++){
+      const x = i/pw*xSpan - xSpan/2, y = ySpan/2 - j/ph*ySpan;
+      const v = f(x,y); vals[j*(pw+1)+i]=v; if(v<mn) mn=v; if(v>mx) mx=v;
+    }
+    const BANDS = 22, band = v => Math.floor((v-mn)/(mx-mn)*BANDS);
+    const off = document.createElement("canvas"); off.width=pw; off.height=ph;
+    const octx = off.getContext("2d"); const img = octx.createImageData(pw,ph);
+    const [r,g,b] = hexToRgb(colors.accent);
+    for(let j=0;j<ph;j++) for(let i=0;i<pw;i++){
+      const k = j*(pw+1)+i, b0 = band(vals[k]);
+      const b1 = band(vals[k+1]), b2 = band(vals[k+pw+1]);
+      if(b0!==b1 || b0!==b2){
+        const idx = (j*pw+i)*4, major = Math.max(b0,b1,b2)%5===0;
+        img.data[idx]=r; img.data[idx+1]=g; img.data[idx+2]=b; img.data[idx+3]= major ? 150 : 70;
+      }
+    }
+    octx.putImageData(img,0,0);
+    contours = off;
+  }
+
+  const N = 30, ITERS = 200;
+  let P=[], gbest=null, iter=0, raf=null, tick=0;
+
+  function init(){
+    P = []; gbest = {x:0,y:0,v:Infinity}; iter = 0;
+    for(let n=0;n<N;n++){
+      const x = (Math.random()-.5)*xSpan*0.94, y = (Math.random()-.5)*ySpan*0.94;
+      const p = {x,y,vx:(Math.random()-.5)*0.04,vy:(Math.random()-.5)*0.04,bx:x,by:y,bv:f(x,y),trail:[[x,y]]};
+      P.push(p); if(p.bv<gbest.v) gbest={x,y,v:p.bv};
+    }
+  }
+  function step(){
+    /* local-best PSO on a ring: each particle follows the best of its four nearest neighbours */
+    const w = 0.9 - 0.5*(iter/ITERS), c1=1.5, c2=1.5, vmax=0.05*ySpan;
+    const snap = P.map(p => ({x:p.bx, y:p.by, v:p.bv}));
+    P.forEach((p,i) => {
+      let l = snap[i];
+      for(const k of [-2,-1,1,2]){ const q = snap[(i+k+N)%N]; if(q.v<l.v) l=q; }
+      p.vx = w*p.vx + c1*Math.random()*(p.bx-p.x) + c2*Math.random()*(l.x-p.x);
+      p.vy = w*p.vy + c1*Math.random()*(p.by-p.y) + c2*Math.random()*(l.y-p.y);
+      const sp = Math.hypot(p.vx,p.vy); if(sp>vmax){ p.vx*=vmax/sp; p.vy*=vmax/sp; }
+      p.x = Math.max(-xSpan/2, Math.min(xSpan/2, p.x+p.vx));
+      p.y = Math.max(-ySpan/2, Math.min(ySpan/2, p.y+p.vy));
+      const v = f(p.x,p.y);
+      if(v<p.bv){ p.bv=v; p.bx=p.x; p.by=p.y; }
+      if(v<gbest.v) gbest={x:p.x,y:p.y,v};
+      p.trail.push([p.x,p.y]); if(p.trail.length>12) p.trail.shift();
+    });
+    iter++;
+  }
+  function draw(){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    if(contours) ctx.drawImage(contours,0,0,W,H);
+    ctx.lineWidth = 1; ctx.strokeStyle = colors.ink; ctx.globalAlpha = 0.28;
+    for(const p of P){
+      if(p.trail.length<2) continue;
+      ctx.beginPath();
+      p.trail.forEach(([x,y],i) => { const [px,py]=toPx(x,y); i?ctx.lineTo(px,py):ctx.moveTo(px,py); });
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1; ctx.fillStyle = colors.ink;
+    for(const p of P){ const [px,py]=toPx(p.x,p.y); ctx.beginPath(); ctx.arc(px,py,2.6,0,Math.PI*2); ctx.fill(); }
+    if(!gbest) return;
+    const [gx,gy] = toPx(gbest.x,gbest.y);
+    ctx.strokeStyle = colors.best; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(gx,gy,8,0,Math.PI*2); ctx.stroke();
+  }
+  function loop(){
+    tick++;
+    if(tick%2===0 && iter<ITERS) step();
+    draw();
+    raf = iter<ITERS ? requestAnimationFrame(loop) : null;
+  }
+  function run(){
+    cancelAnimationFrame(raf); init();
+    if(reduce.matches){ while(iter<ITERS) step(); draw(); }
+    else { tick=0; raf = requestAnimationFrame(loop); }
+  }
+  function resize(){
+    const r = canvas.getBoundingClientRect();
+    if(!r.width || !r.height) return;
+    W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ySpan = 2; xSpan = 2*W/H;
+    readColors(); buildContours(); draw();
+  }
+
+  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(resize, 120); }).observe(canvas);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { readColors(); buildContours(); draw(); });
+  document.getElementById("rerun").addEventListener("click", run);
+  resize(); run();
+})();
+</script>
+</body>
+</html>
