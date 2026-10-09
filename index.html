@@ -8,6 +8,18 @@
 <meta property="og:title" content="Dr Indu Bala">
 <meta property="og:description" content="Applied mathematician working on optimisation and trustworthy AI for high-stakes decisions.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://indubala-y.github.io/">
+<meta property="og:image" content="https://indubala-y.github.io/images/profile.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://indubala-y.github.io/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Indu Bala","honorificPrefix":"Dr",
+ "jobTitle":"Lecturer","url":"https://indubala-y.github.io/","image":"https://indubala-y.github.io/images/profile.jpg",
+ "email":"mailto:indu.bala@adelaide.edu.au",
+ "worksFor":{"@type":"CollegeOrUniversity","name":"Adelaide University"},
+ "knowsAbout":["Stochastic optimisation","Evolutionary computation","Trustworthy AI","Uncertainty quantification","Clinical natural language processing","Physics-informed neural networks"],
+ "sameAs":["https://scholar.google.com.au/citations?user=BtNMYvgAAAAJ","https://orcid.org/0000-0001-8016-9364","https://www.linkedin.com/in/indu-bala-00279719","https://researchers.adelaide.edu.au/profile/indu.bala"]}
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%231D6A57'/><circle cx='20' cy='13' r='4' fill='none' stroke='%23F2C36B' stroke-width='2'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,8 +60,8 @@ nav.main a:hover,nav.main a[aria-current="true"]{color:var(--ink)}
 
 /* hero */
 .hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:3.5rem;align-items:center;padding:4.5rem 0 4rem}
-.portrait{width:5.5rem;height:5.5rem;margin:0 0 1.75rem;border-radius:50%;overflow:hidden;background:var(--accent);position:relative}
-.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait{width:7rem;height:7rem;margin:0 0 1.75rem;border-radius:50%;overflow:hidden;background:var(--accent);position:relative}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
 .portrait span{display:none;place-items:center;width:100%;height:100%;font:600 1.6rem/1 var(--sans);color:var(--paper)}
 .portrait.no-photo img{display:none}
 .portrait.no-photo span{display:grid}
@@ -70,6 +82,22 @@ h1{font:700 clamp(2.6rem,6vw,4.2rem)/1.02 var(--sans);letter-spacing:-.025em;mar
 .swatch{display:inline-block;width:.7em;height:.7em;border:2px solid var(--best);border-radius:50%;vertical-align:-.05em}
 button.rerun{flex:none;font:500 .9rem/1 var(--sans);color:var(--ink);background:none;border:1px solid var(--rule);border-radius:999px;padding:.55rem .85rem;cursor:pointer}
 button.rerun:hover{border-color:var(--accent);color:var(--accent)}
+
+.modes{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .75rem}
+.modes button{font:500 .9rem/1 var(--sans);color:var(--muted);background:none;border:1px solid var(--rule);border-radius:999px;padding:.5rem .8rem;cursor:pointer}
+.modes button:hover{color:var(--ink)}
+.modes button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.swarm .status{display:block;margin-top:.35rem;font:500 .88rem/1.4 var(--sans);color:var(--ink);min-height:1.25em}
+
+/* photos */
+.moments{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:1rem;margin:0 0 2.25rem}
+.moments figure{margin:0}
+.moments img{width:100%;height:18rem;object-fit:cover;border-radius:6px;display:block;background:var(--wash)}
+.moments .iwd img{object-position:center 58%}
+.moments figcaption{font-size:.88rem;line-height:1.45;color:var(--muted);margin-top:.5rem}
+.tl a{text-decoration-thickness:1px}
+.tl .ext::after{content:"";display:inline-block;width:.55em;height:.55em;margin-left:.3em;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:translateY(-.25em) scale(.75)}
+.tl.codes li{grid-template-columns:8.5rem minmax(0,1fr)}
 
 /* sections */
 section.sec{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:2.5rem;padding:3.75rem 0;border-top:1px solid var(--rule)}
@@ -125,12 +153,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   section.sec{grid-template-columns:1fr;gap:1.25rem;padding:3rem 0}
   section.sec > h2{position:static}
   .themes{grid-template-columns:1fr;gap:1.75rem}
+  .moments{grid-template-columns:1fr}
+  .moments img{height:auto;aspect-ratio:4/3}
 }
 @media (max-width:560px){
   header.top .wrap{gap:1rem}
   .brand{display:none}
   nav.main{margin-left:0}
-  .tl li{grid-template-columns:1fr;gap:0}
+  .tl li,.tl.codes li{grid-template-columns:1fr;gap:0}
   .swarm figcaption{flex-direction:column}
 }
 @media print{
@@ -179,10 +209,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
     </div>
 
     <figure class="swarm">
-      <div class="stage"><canvas id="swarm" role="img" aria-label="Animation of a particle swarm moving across a contour map and converging on its lowest point"></canvas></div>
+      <div class="modes" role="group" aria-label="Choose an animation">
+        <button type="button" data-mode="swarm" aria-pressed="true">Swarm search</button>
+        <button type="button" data-mode="ortho" aria-pressed="false">Orthogonal start</button>
+        <button type="button" data-mode="conformal" aria-pressed="false">Uncertainty</button>
+        <button type="button" data-mode="nlp" aria-pressed="false">Clinical text</button>
+        <button type="button" data-mode="pinn" aria-pressed="false">Physics-informed</button>
+      </div>
+      <div class="stage"><canvas id="swarm" role="img" aria-label="Animated illustrations of my research: optimisation, uncertainty quantification, clinical text analysis and physics-informed learning"></canvas></div>
       <figcaption>
-        <p>A particle swarm with ring topology searching a multimodal landscape, the family of methods behind my OrPSOC and OPSO variants. The <span class="swatch" aria-hidden="true"></span> ring marks the best point found so far.</p>
-        <button class="rerun" id="rerun" type="button">Run the swarm again</button>
+        <p><span id="swarm-caption"></span><span class="status" id="swarm-status" aria-live="polite"></span></p>
+        <button class="rerun" id="rerun" type="button">Run again</button>
       </figcaption>
     </figure>
   </div>
@@ -192,7 +229,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
     <div class="body">
       <p>I am a Lecturer in the School of Computer Science and Information Technology at Adelaide University and a member of the Australian Institute for Machine Learning (AIML). My work sits between mathematics and computing: I build optimisation and modelling methods with clear theoretical footing, then take them into messy real-world problems where decisions carry consequences.</p>
       <p>From 2022 to 2024 I was a postdoctoral researcher at the University of Adelaide on an NHMRC-funded project improving the safety of implantable medical devices, where I developed machine learning and NLP methods for adverse-event reports. Before that I was an Assistant Professor in the Department of Mathematics at Presidency University, India.</p>
-      <p>I hold a PhD in Applied Mathematical Sciences from The NorthCap University (2021), an industry-funded project on comprehensive learning gravitational search algorithms, along with an MPhil and MSc in Applied Mathematics. I collaborate with researchers in Korea, India, the Netherlands, Malaysia and Spain.</p>
+      <p>I hold a PhD in Applied Mathematical Sciences (2021). My doctoral research, funded by industry, developed stochastic and nature-inspired optimisation algorithms for complex, multimodal problems and applied them in engineering and healthcare. I also hold an MPhil and an MSc in Applied Mathematics, and I collaborate with researchers in Korea, India, the Netherlands, Malaysia and Spain.</p>
     </div>
   </section>
 
@@ -240,21 +277,34 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   <section class="sec" id="recognition" aria-labelledby="h-rec">
     <h2 id="h-rec">Recognition</h2>
     <div class="body">
+      <div class="moments">
+        <figure class="iwd">
+          <img src="images/iwd-stem-trailblazer-2025.jpg" alt="Indu Bala holding the STEM Trailblazer Award at The Australia Today International Women’s Day Awards 2025" loading="lazy" width="900" height="1200">
+          <figcaption>Receiving the STEM Trailblazer Award, International Women’s Day Awards 2025</figcaption>
+        </figure>
+        <figure>
+          <img src="images/csiro-on-prime-2025.jpg" alt="Participants at the CSIRO ON Prime Adelaide 18 Showcase, October 2025" loading="lazy" width="1400" height="1050">
+          <figcaption>CSIRO ON Prime Adelaide 18 Showcase, October 2025</figcaption>
+        </figure>
+      </div>
       <ul class="tl">
-        <li><span class="yr">2026</span><span>Finalist, Women in AI APAC Awards, Foundational AI category</span></li>
-        <li><span class="yr">2026</span><span>Finalist, Women in Innovation Awards (South Australia), Maths and Data category</span></li>
-        <li><span class="yr">2025</span><span>STEM Trailblazer Award<small>Australia Today International Women’s Day Awards</small></span></li>
+        <li><span class="yr">2026</span><span><a class="ext" href="https://www.womeninai.co/waiapac2026finalist">Finalist, Women in AI APAC Awards 2026</a><small>Foundational AI category</small></span></li>
+        <li><span class="yr">2026</span><span>Finalist, Women in Innovation Awards (South Australia)<small>Maths and Data category</small></span></li>
+        <li><span class="yr">2025</span><span><a class="ext" href="https://www.linkedin.com/feed/update/urn:li:activity:7303172563176693760/">Winner, STEM Trailblazer Award</a><small>The Australia Today International Women’s Day Awards, February 2025</small></span></li>
+        <li><span class="yr">2025</span><span>CSIRO ON Prime research translation program, team lead</span></li>
         <li><span class="yr">2025</span><span>Early and Mid-Career Researcher grant<small>Faculty of Sciences, Engineering and Technology, University of Adelaide</small></span></li>
-        <li><span class="yr">2024</span><span>Data Science Pioneer Award<small>Women of Colour in STEM Awards</small></span></li>
-        <li><span class="yr">2024</span><span>Australia–India Women Researchers’ Exchange Fellowship<small>Collaboration with NIT Jalandhar on optimising urban rainwater harvesting</small></span></li>
-        <li><span class="yr">2024</span><span>WIMSNG conference travel grant</span></li>
-        <li><span class="yr">2023</span><span>CASS Foundation travel grant</span></li>
-        <li><span class="yr">2023</span><span>UN Datathon travel grant</span></li>
+        <li><span class="yr">2024</span><span><a class="ext" href="https://stemsisters.org.au/woc-awards-2024/">Winner, Data Science Pioneer Award</a><small>Women of Colour in STEM Awards, STEM Sisters, December 2024</small></span></li>
+        <li><span class="yr">2024</span><span><a class="ext" href="https://www.linkedin.com/feed/update/urn:li:activity:7290957398544957440/">Australia–India Women Researchers’ Exchange Fellowship</a><small>Project: A multi-objective framework for optimising water management and advancing urban sustainability</small></span></li>
+        <li><span class="yr">2024</span><span>CASS Foundation funding for international conference travel</span></li>
+        <li><span class="yr">2024</span><span>Conference funding, WIMSIG Conference</span></li>
+        <li><span class="yr">2023</span><span>Funding to compete in the UN Datathon</span></li>
       </ul>
       <h3 class="sub">In the media</h3>
       <ul class="tl">
-        <li><span class="yr">Profile</span><span>Feature on my research and story in <em>Magnify Me</em>, the STEM Sisters monthly magazine</span></li>
-        <li><span class="yr">Interview</span><span>Australia India Institute, on working in Australia’s STEM sector and supporting women in AI</span></li>
+        <li><span class="yr">Interview</span><span><a class="ext" href="https://arch-india.org/news-events/342-empowering-women-stem-dr-indu-bala-her-aiwe-fellowship-experience">Empowering women in STEM: Dr Indu Bala on her AIWE fellowship experience</a><small>Australian Researcher Cooperation Hub (ARCH-India), on women in STEM and trustworthy AI in healthcare</small></span></li>
+        <li><span class="yr">Feature</span><span><!-- MAGNIFY-ME-LINK -->A feature on my journey through mathematics and AI<small><em>Magnify Me</em>, the STEM Sisters monthly magazine</small></span></li>
+        <li><span class="yr">News</span><span><a class="ext" href="https://set.adelaide.edu.au/news/list/2025/03/18/the-australia-today-international-womens-day-awards">Dr Indu Bala wins STEM Trailblazer Award</a><small>Adelaide University news</small></span></li>
+        <li><span class="yr">Video</span><span><a class="ext" href="https://www.youtube.com/watch?v=I9XFm0wO2-U">A web app for optimising product pricing for farmers</a><small>UN Datathon 2023 entry</small></span></li>
       </ul>
     </div>
   </section>
@@ -262,21 +312,23 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   <section class="sec" id="teaching" aria-labelledby="h-teach">
     <h2 id="h-teach">Teaching</h2>
     <div class="body">
-      <p>I coordinate and teach machine learning and data science courses at undergraduate and postgraduate level, including a third-year machine learning course of around 300 students.</p>
-      <ul class="tl">
-        <li><span class="yr">UG</span><span>Using Machine Learning Tools</span></li>
-        <li><span class="yr">UG</span><span>COMP1045 Applications of Machine Learning</span></li>
-        <li><span class="yr">PG</span><span>COMP6005 Consulting and AI ethics</span></li>
-        <li><span class="yr">PG</span><span>Master of Data Science and Master of Computer Science research projects</span></li>
-        <li><span class="yr">PG</span><span>DATA6000 Capstone: Industry Case Studies<small>Kaplan Business School</small></span></li>
+      <p>I teach across applied mathematics, optimisation and data science, at undergraduate and postgraduate level.</p>
+      <ul class="tl codes">
+        <li><span class="yr">MATH4012</span><span>Stochastic Optimisation<small>Undergraduate and postgraduate</small></span></li>
+        <li><span class="yr">COMP SCI 3317</span><span>Using Machine Learning Tools<small>Undergraduate</small></span></li>
+        <li><span class="yr">COMP1045</span><span>Applied Machine Learning<small>Undergraduate</small></span></li>
+        <li><span class="yr">COMP6005</span><span>Introduction to Data Science, Ethics and Privacy<small>Postgraduate</small></span></li>
+        <li><span class="yr">MATHS 7097</span><span>Data Science Research Project<small>Postgraduate</small></span></li>
       </ul>
       <h3 class="sub">Research supervision</h3>
       <ul class="tl">
-        <li><span class="yr">PhD</span><span>Subarna Khanra: physics-informed neural networks for differential equations in complex physical systems (external supervisor, SLIET)</span></li>
-        <li><span class="yr">Master</span><span>Paul Lucena: dynamic knowledge structures with transformer-based embeddings</span></li>
-        <li><span class="yr">Master</span><span>Yige Wang: adverse-event detection and advisory systems for the FDA database using ML and RAG</span></li>
-        <li><span class="yr">Intern</span><span>Yu-Chieh Liao: AI-driven text analytics for early detection of mental health risks</span></li>
-        <li><span class="yr">Summer</span><span>Henry Philip: multi-objective AutoML for neural architecture optimisation (2024–25)</span></li>
+        <li><span class="yr">2026</span><span>Forecasting non-stationary data with drift and regime detection<small>Master of Data Science research project</small></span></li>
+        <li><span class="yr">2026</span><span>Risk-aware information extraction from large-scale text using NLP and large language models<small>Master of Data Science research project</small></span></li>
+        <li><span class="yr">2025–</span><span>Physics-informed neural networks for efficient, generalisable solutions of differential equations in complex physical systems<small>PhD</small></span></li>
+        <li><span class="yr">2025–</span><span>Exploring dynamic knowledge structures through transformer-based embedding techniques<small>Master’s research</small></span></li>
+        <li><span class="yr">2025–</span><span>AI-driven text analytics for early detection of mental health risks<small>Master’s research internship</small></span></li>
+        <li><span class="yr">2024–</span><span>Adverse-event detection and advisory systems for the FDA database using machine learning and retrieval-augmented generation<small>Master’s research</small></span></li>
+        <li><span class="yr">2024–25</span><span>A multi-objective AutoML system for optimising neural network architecture<small>Adelaide Summer Research Scholarship</small></span></li>
       </ul>
       <p class="note">I welcome enquiries from prospective HDR and Master’s students interested in optimisation, trustworthy AI or clinical NLP. Please email me with a short description of your background and interests.</p>
     </div>
@@ -290,20 +342,36 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
         <li><span class="yr">2027</span><span>ASCE Forensic Engineering Conference (invited, March 2027)</span></li>
         <li><span class="yr">2025</span><span>32nd National Symposium on Mathematical Sciences (SKSM32), Cyberjaya, Malaysia</span></li>
         <li><span class="yr">2025</span><span>3rd International Conference on Recent Trends in Mathematical Sciences (ICRTMS-2025), Shimla, India</span></li>
-        <li><span class="yr">2025</span><span>Toward transparent evolution: explainability in stochastic and machine learning algorithms<small>National Conference on Mathematical and Statistical Modelling, Simulation and Optimization of Energy Systems, University of Bengkulu, Indonesia</small></span></li>
-        <li><span class="yr">2025</span><span>A synergistic framework of evolutionary algorithms and explainable machine learning<small>Summer School on Evolutionary Algorithms and Machine Learning, NIT Jalandhar, India</small></span></li>
-        <li><span class="yr">2025</span><span>Expert lectures on optimisation in water networks (NIT Jalandhar) and mathematics in machine learning (SLIET Longowal)</span></li>
+        <li><span class="yr">2025</span><span><a class="ext" href="https://www.linkedin.com/posts/indu-bala-00279719_universityofadelaide-icmsoes2025-ai-activity-7326124792980385793-fh1n">National Conference on Mathematical and Statistical Modelling, Simulation and Optimization of Energy Systems</a><small>Indonesia, June 2025</small></span></li>
+        <li><span class="yr">2025</span><span><a class="ext" href="https://www.linkedin.com/feed/update/urn:li:activity:7323341583221694465/">Summer School on Evolutionary Algorithms and Machine Learning</a><small>NIT Jalandhar, India, June 2025</small></span></li>
+        <li><span class="yr">2025</span><span>Expert lectures on optimisation in water network systems (NIT Jalandhar, January) and mathematics in machine learning (SLIET Longowal, February)</span></li>
       </ul>
-      <h3 class="sub">Service</h3>
+      <h3 class="sub">Conference presentations</h3>
+      <ul class="tl">
+        <li><span class="yr">2025</span><span>Robust or suggestible? Exploring non-clinical induction in LLM drug-safety decisions<small>NeurIPS 2025 Workshop on GenAI for Health, San Diego, USA</small></span></li>
+        <li><span class="yr">2025</span><span>Enhancing explainability and reliable decision-making in PSO through communication topologies<small>GECCO 2025, Málaga, Spain</small></span></li>
+        <li><span class="yr">2024</span><span>Orthogonally initiated particle swarm optimization with advanced mutation<small>GECCO 2024, Melbourne, Australia</small></span></li>
+        <li><span class="yr">2024</span><span>Detecting public emotion and concern reports in voluntarily reported mesh implant data<small>ICACIS 2024, Singapore</small></span></li>
+        <li><span class="yr">2024</span><span>A robust machine learning method for multiclass adverse event classification<small>Australian Data Science Conference</small></span></li>
+        <li><span class="yr">2023</span><span>Optimizing neural network training: the impact of Lévy flight and chaos in the artificial electric field algorithm<small>ANZIAM Conference, Adelaide</small></span></li>
+      </ul>
+      <h3 class="sub">Service and editorial</h3>
       <ul class="tl">
         <li><span class="yr">2026</span><span>Reviewer, GenAI4Health Workshop, NeurIPS 2026</span></li>
-        <li><span class="yr">2025</span><span>International Advisory Committee, rTIME-2025</span></li>
+        <li><span class="yr">2025</span><span><a class="ext" href="https://rtime2025.netlify.app/">International Advisory Committee, rTIME-2025</a><small>National Institute of Advanced Manufacturing Technology, Ranchi, India</small></span></li>
         <li><span class="yr">2025</span><span>Technical Committee, Summer School on Evolutionary Algorithms and Machine Learning, NIT Jalandhar</span></li>
-        <li><span class="yr">2025</span><span>Session chair, Mathematical and Statistical Modelling of Energy Systems conference, Indonesia</span></li>
         <li><span class="yr">2024</span><span>Session chair, ANZIAM 2024</span></li>
-        <li><span class="yr">2022–</span><span>Editorial board, <em>Medicon Medical Sciences</em></span></li>
-        <li><span class="yr">Member</span><span>Association for Computing Machinery (ACM), active in the GECCO community</span></li>
+        <li><span class="yr">Editorial</span><span><a class="ext" href="http://www.engmath.org/editorial-board">Editorial board, <em>Engineering Mathematics</em></a></span></li>
+        <li><span class="yr">Review</span><span><a class="ext" href="https://themedicon.com/medicalsciences-reviewer-board">Reviewer board, <em>Medicon Medical Sciences</em></a></span></li>
       </ul>
+      <h3 class="sub">Industry engagement</h3>
+      <ul class="tl">
+        <li><span class="yr">2023</span><span>Visiting Data Analyst, University of South Australia</span></li>
+        <li><span class="yr">2021–22</span><span><a class="ext" href="https://arthritisintelligence.arogyapandit.com/">Research Consultant, Arogya Pandit</a><small>Arthritis intelligence platform</small></span></li>
+        <li><span class="yr">2021</span><span>Market Research Analyst, Myntra</span></li>
+      </ul>
+      <h3 class="sub">Memberships</h3>
+      <p>Association for Computing Machinery (ACM), Australian Academy of Science, INSTICC, World Data System, and MathTech Thinking Foundation.</p>
     </div>
   </section>
 
@@ -331,32 +399,34 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
    type: "journal" | "conference" | "chapter" | "preprint" | "thesis"
    Write your own name exactly as "I. Bala" so it is highlighted. */
 const PUBS = [
-  {type:"journal",year:2026,authors:"D. Chauhan, B. Dutta, I. Bala, N. van Stein, T. Bäck, A. Yadav",title:"Large language models and evolutionary computation: A critical review of bidirectional interaction, automated algorithm design, and co-adaptive systems",venue:"Computer Science Review",details:"63 (2027)",doi:"10.1016/j.cosrev.2026.101050",arxiv:"2505.15741"},
+  {type:"journal",year:2026,authors:"D. Chauhan, B. Dutta, I. Bala, N. van Stein, T. Bäck, A. Yadav",title:"Evolutionary computation and large language models: A survey of methods, synergies, and applications",venue:"Computer Science Review",details:"63, 101050 (2027)",doi:"10.1016/j.cosrev.2026.101050",arxiv:"2505.15741"},
   {type:"journal",year:2026,authors:"S. Khanra, V. K. Kukreja, I. Bala",title:"Physics-informed neural networks for differential equation solutions: A comprehensive review",venue:"Neurocomputing",details:"680, 133317",doi:"10.1016/j.neucom.2026.133317"},
+  {type:"journal",year:2026,authors:"I. Bala, L. Mitchell",title:"Hybridizing artificial electric field algorithm with Lévy flight and chaotic dynamics for enhanced optimisation performance",venue:"Journal of Experimental and Theoretical Analyses",details:"4(4), 34"},
   {type:"journal",year:2026,authors:"T.-L. Kelly, T. Stanford, C. Murray, L. Mitchell, I. Bala, N. Pratt, T. South, M. Gillam",title:"Signal detection of adverse events in medical devices using natural language processing: a case study in pelvic mesh",venue:"Scientific Reports",details:"16(1)",doi:"10.1038/s41598-026-50950-z"},
   {type:"conference",year:2026,authors:"S. R. Sharma, L. Mitchell, B. Singh, I. Bala",title:"A unified multi-objective particle swarm optimization framework for prompt and hyperparameter optimization in large language models",venue:"GECCO ’26 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 317–320, ACM",doi:"10.1145/3795101.3805410"},
-  {type:"chapter",year:2026,authors:"I. Bala, L. Mitchell, M. H. Gillam",title:"Analysis of voluntarily reported data post mesh implantation for detecting public emotion and identifying concern reports",venue:"Communications in Computer and Information Science",details:"vol. 2405, pp. 421–433, Springer (forthcoming)",doi:"10.1007/978-3-032-30990-7_31",arxiv:"2509.04517"},
-  {type:"chapter",year:2026,authors:"I. Bala, D. Chauhan",title:"Performance evaluation of the grey wolf optimizer against advanced differential evolution variants",venue:"Grey Wolf Optimizer: A Pack of Solutions for Your Optimization Problems (S. Mirjalili, ed.)",details:"pp. 313–326, Morgan Kaufmann",doi:"10.1016/B978-0-443-36624-6.00039-1"},
-  {type:"chapter",year:2026,authors:"D. S. Brar, I. Bala, B. Singh, V. Nanda",title:"Adaptive augmentation and synthetic image generation (AAg-SiG) framework for food applications",venue:"Lecture Notes in Networks and Systems",details:"vol. 1929, pp. 155–167, Springer",doi:"10.1007/978-3-032-22911-3_12"},
+  {type:"chapter",year:2026,authors:"I. Bala, L. Mitchell, M. H. Gillam",title:"Analysis of voluntarily reported data post mesh implantation for detecting public emotion and identifying concern reports",venue:"Advanced Communication and Intelligent Systems (ICACIS 2024), Communications in Computer and Information Science",details:"vol. 2405, pp. 421–433, Springer",doi:"10.1007/978-3-032-30990-7_31",arxiv:"2509.04517"},
+  {type:"chapter",year:2026,authors:"D. Chauhan, I. Bala",title:"Performance evaluation of the grey wolf optimizer against advanced differential evolution variants",venue:"Grey Wolf Optimizer: A Pack of Solutions for Your Optimization Problems (S. Mirjalili, ed.)",details:"pp. 313–326, Morgan Kaufmann",doi:"10.1016/B978-0-443-36624-6.00039-1"},
+  {type:"chapter",year:2026,authors:"D. S. Brar, I. Bala, B. Singh, V. Nanda",title:"Adaptive augmentation and synthetic image generation (AAg-SiG) framework for food applications",venue:"Sustainable Computing and Intelligent Systems, Lecture Notes in Networks and Systems",details:"vol. 1929, pp. 155–167, Springer",doi:"10.1007/978-3-032-22911-3_12"},
+  {type:"chapter",year:2026,authors:"Y.-C. Liao, I. Bala",title:"Interpretable topic modelling of mental health conversations in Australian online forums using network-based insights",venue:"Recent Trends in Communication and Intelligent Systems",details:"pp. 127–137, Springer"},
   {type:"journal",year:2025,authors:"I. Bala, W. Karunarathne, L. Mitchell",title:"Optimizing feature selection by enhancing particle swarm optimization with orthogonal initialization and crossover operator",venue:"Computers, Materials & Continua",details:"84(1), 727–744",doi:"10.32604/cmc.2025.065706"},
-  {type:"journal",year:2025,authors:"I. Bala, E. Sharma, L. Mitchell",title:"Clinical insight from mesh implant narratives using zero-shot retrieval-augmented generation approaches",venue:"Artificial Intelligence Surgery",details:"5(4), 476–488",doi:"10.20517/ais.2025.44"},
-  {type:"journal",year:2025,authors:"A. Aggarwal, E. Awasthi, D. Kukreja, J. Kedia, I. Bala",title:"Modified moth flame optimization and logistic chaotic map integration for image encryption",venue:"International Journal of System Assurance Engineering and Management",details:"16(2), 785–804",doi:"10.1007/s13198-024-02669-1"},
-  {type:"conference",year:2025,authors:"S. Liu, S. Zhang, I. Bala",title:"Robust or suggestible? Exploring non-clinical induction in LLM drug-safety decisions",venue:"NeurIPS 2025 Workshop",details:"",url:"https://arxiv.org/abs/2510.13931"},
+  {type:"journal",year:2025,authors:"I. Bala, E. Sharma, L. Mitchell",title:"Clinical insight from mesh implant narratives using zero-shot retrieval-augmented generation approach",venue:"Artificial Intelligence Surgery",details:"5(4), 476–489",doi:"10.20517/ais.2025.44"},
+  {type:"conference",year:2025,authors:"S. Liu, S. Zhang, I. Bala",title:"Robust or suggestible? Exploring non-clinical induction in LLM drug-safety decisions",venue:"NeurIPS 2025 Workshop",details:"",arxiv:"2510.13931"},
   {type:"conference",year:2025,authors:"N. Gupta, I. Bala, B. Dutta, L. Martínez, A. Yadav",title:"Enhancing explainability and reliable decision-making in particle swarm optimization through communication topologies",venue:"GECCO ’25 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 955–958, ACM",doi:"10.1145/3712255.3726658",arxiv:"2504.12803"},
-  {type:"conference",year:2025,authors:"A. Bairagi, A. Sayal, S. Singh, A. Gupta, I. Bala, M. Gokhale, D. Dubey",title:"A hybrid machine learning and deep learning framework for early detection of depression from social media text",venue:"International Conference on Electrical Communication and Computing Technologies (iCONECCT)",details:"IEEE",doi:"10.1109/iCONECCT67014.2025.11470207"},
+  {type:"conference",year:2025,authors:"A. Bairagi, A. Sayal, S. Singh, A. Gupta, I. Bala, M. Gokhale, D. Dubey",title:"A hybrid machine learning and deep learning framework for early detection of depression from social media text",venue:"International Conference on Electrical, Communication, and Computing Technologies (iCONECCT)",details:"IEEE",doi:"10.1109/iCONECCT67014.2025.11470207"},
+  {type:"preprint",year:2025,authors:"S. Khanra, V. K. Kukreja, I. Bala",title:"Forecasting India’s demographic transition under fertility policy scenarios using a hybrid LSTM-PINN model",venue:"arXiv preprint",details:"arXiv:2512.00760",arxiv:"2512.00760"},
   {type:"journal",year:2024,authors:"I. Bala, T.-L. Kelly, T. Stanford, M. H. Gillam, L. Mitchell",title:"Machine learning-based analysis of adverse events in mesh implant surgery reports",venue:"Social Network Analysis and Mining",details:"14(1), 63",doi:"10.1007/s13278-024-01229-6"},
   {type:"journal",year:2024,authors:"I. Bala, A. Yadav, J. H. Kim",title:"Optimization for cost-effective design of water distribution networks: a comprehensive learning approach",venue:"Evolutionary Intelligence",details:"17(4), 2981–3013",doi:"10.1007/s12065-024-00922-x"},
   {type:"journal",year:2024,authors:"I. Bala, T.-L. Kelly, R. Lim, M. H. Gillam, L. Mitchell",title:"An effective approach for multiclass classification of adverse events using machine learning",venue:"Journal of Computational and Cognitive Engineering",details:"3(3), 226–239",doi:"10.47852/bonviewjcce32021924"},
   {type:"journal",year:2024,authors:"I. Bala, L. Mitchell",title:"Thematic exploration of educational research after the COVID pandemic through topic modelling",venue:"Journal of Applied Learning & Teaching",details:"7(1), 26–34",doi:"10.37074/jalt.2024.7.1.40"},
   {type:"journal",year:2024,authors:"T. N. Le, M. Afshar Ali, S. Gadzhanova, R. Lim, I. Bala, K. N. Bogale, M. Gillam",title:"Hernia repair prevalence by age and gender among the Australian adult population from 2017 to 2021",venue:"Critical Public Health",details:"34(1), 1–11",doi:"10.1080/09581596.2024.2351981"},
   {type:"conference",year:2024,authors:"I. Bala, D. Chauhan, L. Mitchell",title:"Orthogonally initiated particle swarm optimization with advanced mutation for real-parameter optimization",venue:"GECCO ’24 Companion, Genetic and Evolutionary Computation Conference",details:"pp. 735–738, ACM",doi:"10.1145/3638530.3654214"},
-  {type:"preprint",year:2024,authors:"W. Karunarathne, I. Bala, D. Chauhan, M. Roughan, L. Mitchell",title:"Modified CMA-ES algorithm for multi-modal optimization: incorporating niching strategies and dynamic adaptation mechanism",venue:"arXiv preprint",details:"arXiv:2407.00939",url:"https://arxiv.org/abs/2407.00939"},
+  {type:"preprint",year:2024,authors:"W. Karunarathne, I. Bala, D. Chauhan, M. Roughan, L. Mitchell",title:"Modified CMA-ES algorithm for multi-modal optimization: incorporating niching strategies and dynamic adaptation mechanism",venue:"arXiv preprint",details:"arXiv:2407.00939",arxiv:"2407.00939"},
   {type:"journal",year:2023,authors:"I. Bala",title:"Natural language processing in medical science and healthcare",venue:"Medicon Medical Sciences",details:"4(1), 1–2",doi:"10.55162/mcms.04.088"},
   {type:"conference",year:2023,authors:"I. Bala, A. Yadav",title:"Optimizing reactive power of IEEE-14 bus system using artificial electric field algorithm",venue:"Congress on Intelligent Systems, Lecture Notes in Networks and Systems",details:"vol. 613, pp. 651–665, Springer",doi:"10.1007/978-981-19-9379-4_47"},
   {type:"journal",year:2022,authors:"I. Bala, A. Yadav",title:"Niching comprehensive learning gravitational search algorithm for multimodal optimization problems",venue:"Evolutionary Intelligence",details:"15(1), 695–721",doi:"10.1007/s12065-020-00547-w"},
-  {type:"thesis",year:2021,authors:"I. Bala",title:"A comprehensive learning gravitational search algorithm and its applications",venue:"PhD thesis, The NorthCap University",details:"",url:"https://shodhganga.inflibnet.ac.in/handle/10603/312849"},
+  {type:"thesis",year:2021,authors:"I. Bala",title:"A comprehensive learning gravitational search algorithm and its applications",venue:"PhD thesis",details:"",url:"https://shodhganga.inflibnet.ac.in/handle/10603/312849"},
   {type:"journal",year:2020,authors:"I. Bala, A. Yadav",title:"Comprehensive learning gravitational search algorithm for global optimization of multimodal functions",venue:"Neural Computing and Applications",details:"32(11), 7347–7382",doi:"10.1007/s00521-019-04250-5"},
-  {type:"conference",year:2020,authors:"I. Bala, A. Yadav",title:"Optimal reactive power dispatch using gravitational search algorithm to solve IEEE-14 bus system",venue:"Communication and Intelligent Systems (ICCIS 2019)",details:"pp. 463–473, Springer",doi:"10.1007/978-981-15-3325-9_36"},
+  {type:"conference",year:2020,authors:"I. Bala, A. Yadav",title:"Optimal reactive power dispatch using gravitational search algorithm to solve IEEE-14 bus system",venue:"International Conference on Communication and Intelligent Systems (ICCIS 2019)",details:"pp. 463–473, Springer",doi:"10.1007/978-981-15-3325-9_36"},
   {type:"journal",year:2019,authors:"I. Bala, A. Malhotra",title:"Fuzzy classification with comprehensive learning gravitational search algorithm in breast tumor detection",venue:"International Journal of Recent Technology and Engineering",details:"8(2), 2688–2694",doi:"10.35940/ijrte.B2801.078219"},
   {type:"conference",year:2018,authors:"I. Bala, A. Yadav",title:"Gravitational search algorithm: a state-of-the-art review",venue:"Harmony Search and Nature Inspired Optimization Algorithms (ICHSA 2018), Advances in Intelligent Systems and Computing",details:"vol. 741, pp. 27–37, Springer",doi:"10.1007/978-981-13-0761-4_3"}
 ];
@@ -435,11 +505,20 @@ document.getElementById("q").addEventListener("input", renderPubs);
   document.querySelectorAll("section.sec").forEach(s => io.observe(s));
 })();
 
-/* ---------- Particle swarm hero ---------- */
+/* ---------- Hero animations ---------- */
 (() => {
   const canvas = document.getElementById("swarm");
   const ctx = canvas.getContext("2d");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const captionEl = document.getElementById("swarm-caption");
+  const statusEl = document.getElementById("swarm-status");
+  const CAPTIONS = {
+    swarm: 'A particle swarm with ring topology searching a multimodal landscape. The <span class="swatch" aria-hidden="true"></span> ring marks the best point found so far.',
+    conformal: 'Uncertainty quantification for infrastructure: conformal prediction wraps a forecast, here a synthetic water-demand series, in an interval with a guaranteed coverage rate. Observations outside the interval are ringed in ochre.',
+    nlp: 'Clinical NLP for drug and device safety: models read free-text reports and extract devices, drugs, adverse events and timing, turning narratives into signals that can be monitored. Reports shown are illustrative.',
+    pinn: 'Scientific machine learning: a physics-informed neural network learns the solution of a differential equation, here heat diffusion, by penalising any violation of the governing physics and boundary conditions.',
+    ortho: 'Where a swarm starts matters. Random starting points leave regions of the search space unexplored; orthogonal initialisation, used in my OrPSOC and OPSO algorithms, spreads them so every region is covered.'
+  };
   const wells = [
     {x: 0.46, y:-0.32, d:1.10, s:0.18},
     {x:-0.58, y: 0.42, d:0.80, s:0.22},
@@ -456,11 +535,12 @@ document.getElementById("q").addEventListener("input", renderPubs);
   };
 
   let W=0,H=0,dpr=1,xSpan=2,ySpan=2,contours=null,colors={};
+  let mode="swarm", raf=null, timer=null;
   const toPx = (x,y) => [ (x + xSpan/2)/xSpan*W, (1 - (y + ySpan/2)/ySpan)*H ];
 
   function readColors(){
     const cs = getComputedStyle(document.documentElement);
-    colors = {accent:cs.getPropertyValue("--accent").trim(), ink:cs.getPropertyValue("--ink").trim(), best:cs.getPropertyValue("--best").trim()};
+    colors = {accent:cs.getPropertyValue("--accent").trim(), ink:cs.getPropertyValue("--ink").trim(), best:cs.getPropertyValue("--best").trim(), muted:cs.getPropertyValue("--muted").trim()};
   }
   function hexToRgb(h){ h=h.replace("#",""); if(h.length===3) h=h.split("").map(c=>c+c).join(""); const n=parseInt(h,16); return [(n>>16)&255,(n>>8)&255,n&255]; }
 
@@ -487,19 +567,24 @@ document.getElementById("q").addEventListener("input", renderPubs);
     octx.putImageData(img,0,0);
     contours = off;
   }
+  function base(alpha=1){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    if(contours){ ctx.globalAlpha = alpha; ctx.drawImage(contours,0,0,W,H); ctx.globalAlpha = 1; }
+  }
 
+  /* ----- Mode 1: ring-topology PSO ----- */
   const N = 30, ITERS = 200;
-  let P=[], gbest=null, iter=0, raf=null, tick=0;
-
-  function init(){
-    P = []; gbest = {x:0,y:0,v:Infinity}; iter = 0;
+  let P=[], gbest=null, iter=0, tick=0;
+  function swarmInit(){
+    P = []; gbest = {x:0,y:0,v:Infinity}; iter = 0; tick = 0;
     for(let n=0;n<N;n++){
       const x = (Math.random()-.5)*xSpan*0.94, y = (Math.random()-.5)*ySpan*0.94;
       const p = {x,y,vx:(Math.random()-.5)*0.04,vy:(Math.random()-.5)*0.04,bx:x,by:y,bv:f(x,y),trail:[[x,y]]};
       P.push(p); if(p.bv<gbest.v) gbest={x,y,v:p.bv};
     }
   }
-  function step(){
+  function swarmStep(){
     /* local-best PSO on a ring: each particle follows the best of its four nearest neighbours */
     const w = 0.9 - 0.5*(iter/ITERS), c1=1.5, c2=1.5, vmax=0.05*ySpan;
     const snap = P.map(p => ({x:p.bx, y:p.by, v:p.bv}));
@@ -518,10 +603,8 @@ document.getElementById("q").addEventListener("input", renderPubs);
     });
     iter++;
   }
-  function draw(){
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.clearRect(0,0,W,H);
-    if(contours) ctx.drawImage(contours,0,0,W,H);
+  function swarmDraw(){
+    base();
     ctx.lineWidth = 1; ctx.strokeStyle = colors.ink; ctx.globalAlpha = 0.28;
     for(const p of P){
       if(p.trail.length<2) continue;
@@ -536,16 +619,286 @@ document.getElementById("q").addEventListener("input", renderPubs);
     ctx.strokeStyle = colors.best; ctx.lineWidth = 2.5;
     ctx.beginPath(); ctx.arc(gx,gy,8,0,Math.PI*2); ctx.stroke();
   }
-  function loop(){
+  function swarmLoop(){
     tick++;
-    if(tick%2===0 && iter<ITERS) step();
-    draw();
-    raf = iter<ITERS ? requestAnimationFrame(loop) : null;
+    if(tick%2===0 && iter<ITERS) swarmStep();
+    swarmDraw();
+    raf = iter<ITERS ? requestAnimationFrame(swarmLoop) : null;
+  }
+
+  /* ----- Mode 2: random vs orthogonal initialisation ----- */
+  const G = 4, APPEAR = 1000, HOLD = 2800, GLIDE = 1300;
+  let O = [], t0 = 0;
+  const cellOf = (u,v) => Math.min(G-1,Math.floor(v*G))*G + Math.min(G-1,Math.floor(u*G));
+  const emptyCells = pts => { const c = new Set(pts.map(([u,v]) => cellOf(u,v))); return G*G - c.size; };
+  const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  function orthoInit(){
+    let rand;
+    do { rand = Array.from({length:G*G}, () => [0.03+Math.random()*0.94, 0.03+Math.random()*0.94]); }
+    while(emptyCells(rand) < 4);
+    /* match each random point to one cell (closest pairs first): one point per row-column combination */
+    const pairs = [];
+    rand.forEach(([u,v],i) => { for(let c=0;c<G*G;c++){ const cu=(c%G+.5)/G, cv=(Math.floor(c/G)+.5)/G; pairs.push([Math.hypot(u-cu,v-cv),i,c]); } });
+    pairs.sort((a,b) => a[0]-b[0]);
+    const usedP = new Set(), usedC = new Set(), target = [];
+    for(const [,i,c] of pairs){
+      if(usedP.has(i) || usedC.has(c)) continue;
+      usedP.add(i); usedC.add(c);
+      target[i] = [ (c%G + .5 + (Math.random()-.5)*.35)/G, (Math.floor(c/G) + .5 + (Math.random()-.5)*.35)/G ];
+    }
+    O = rand.map((r,i) => ({r, o:target[i]}));
+  }
+  function orthoDraw(t){
+    base(0.55);
+    const shown = O.filter((_,i) => t >= i*APPEAR/O.length);
+    const g = t < HOLD ? 0 : ease(Math.min(1,(t-HOLD)/GLIDE));
+    const pos = shown.map(p => [p.r[0]+(p.o[0]-p.r[0])*g, p.r[1]+(p.o[1]-p.r[1])*g]);
+    /* empty regions */
+    if(t >= APPEAR){
+      const filled = new Set(pos.map(([u,v]) => cellOf(u,v)));
+      const fade = Math.min(1,(t-APPEAR)/400);
+      ctx.fillStyle = colors.best;
+      for(let c=0;c<G*G;c++){
+        if(filled.has(c)) continue;
+        ctx.globalAlpha = 0.18*fade;
+        ctx.fillRect((c%G)/G*W, Math.floor(c/G)/G*H, W/G, H/G);
+      }
+      ctx.globalAlpha = 1;
+      statusEl.textContent = g >= 1
+        ? "Orthogonal start: all 16 regions covered"
+        : `Random start: ${G*G-filled.size} of 16 regions left empty`;
+    } else statusEl.textContent = "";
+    /* grid */
+    ctx.strokeStyle = colors.ink; ctx.globalAlpha = 0.22; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for(let k=1;k<G;k++){ ctx.moveTo(k/G*W,0); ctx.lineTo(k/G*W,H); ctx.moveTo(0,k/G*H); ctx.lineTo(W,k/G*H); }
+    ctx.stroke();
+    /* glide paths */
+    if(g > 0 && g < 1){
+      ctx.globalAlpha = 0.3; ctx.beginPath();
+      shown.forEach((p,i) => { ctx.moveTo(p.r[0]*W,p.r[1]*H); ctx.lineTo(pos[i][0]*W,pos[i][1]*H); });
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1; ctx.fillStyle = colors.ink;
+    pos.forEach(([u,v]) => { ctx.beginPath(); ctx.arc(u*W,v*H,3.4,0,Math.PI*2); ctx.fill(); });
+  }
+  function orthoLoop(now){
+    const t = Math.max(0, now - t0);
+    orthoDraw(t);
+    raf = t < HOLD+GLIDE ? requestAnimationFrame(orthoLoop) : null;
+  }
+
+  /* ----- Mode 3: conformal prediction interval on a forecast ----- */
+  const gauss = () => Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(2*Math.PI*Math.random());
+  const CF_N = 64, CF_SPLIT = 38, CF_BAND = 1100, CF_PTS = 3400, CF_DUR = CF_BAND + CF_PTS + 200;
+  let CF = null;
+  function cfInit(){
+    const sd = 0.06, pts = [];
+    for(let i=0;i<CF_N;i++){
+      const t = i/(CF_N-1);
+      const mean = 0.48 + 0.16*Math.sin(t*Math.PI*2*2.6) + 0.12*t;
+      pts.push({t, mean, y: mean + gauss()*sd});
+    }
+    /* split-conformal style: interval width set from residual quantile so about 90% are covered */
+    const res = pts.slice(CF_SPLIT+1).map(p => Math.abs(p.y-p.mean)).sort((a,b)=>a-b);
+    const q = res[Math.min(res.length-1, Math.ceil(0.9*(res.length+1))-1)] + 1e-4;
+    CF = {pts, q};
+  }
+  const font = (w,px) => `${w} ${px}px "Schibsted Grotesk", system-ui, sans-serif`;
+  function cfDraw(t){
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    const pad = 28, X = u => pad + u*(W-2*pad), Y = v => H - pad - v*(H-2*pad);
+    const {pts, q} = CF, split = pts[CF_SPLIT].t;
+    /* axis */
+    ctx.strokeStyle = colors.ink; ctx.globalAlpha = .25; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad, H-pad); ctx.lineTo(W-pad, H-pad); ctx.stroke();
+    ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(X(split), pad*.6); ctx.lineTo(X(split), H-pad); ctx.stroke(); ctx.setLineDash([]);
+    ctx.globalAlpha = 1; ctx.fillStyle = colors.muted; ctx.font = font(500,12);
+    ctx.fillText("Observed demand", pad, pad*.75);
+    ctx.fillText("Forecast with 90% interval", X(split)+8, pad*.75);
+    /* history */
+    ctx.strokeStyle = colors.ink; ctx.globalAlpha = .55; ctx.lineWidth = 1.5; ctx.beginPath();
+    for(let i=0;i<=CF_SPLIT;i++){ const p=pts[i]; i?ctx.lineTo(X(p.t),Y(p.y)):ctx.moveTo(X(p.t),Y(p.y)); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+    /* band reveal */
+    const r = Math.min(1, t/CF_BAND), last = CF_SPLIT + Math.round(r*(CF_N-1-CF_SPLIT));
+    if(last > CF_SPLIT){
+      ctx.fillStyle = colors.accent; ctx.globalAlpha = .16; ctx.beginPath();
+      for(let i=CF_SPLIT;i<=last;i++) ctx.lineTo(X(pts[i].t), Y(pts[i].mean+q));
+      for(let i=last;i>=CF_SPLIT;i--) ctx.lineTo(X(pts[i].t), Y(pts[i].mean-q));
+      ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = 1; ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.beginPath();
+      for(let i=CF_SPLIT;i<=last;i++) i>CF_SPLIT?ctx.lineTo(X(pts[i].t),Y(pts[i].mean)):ctx.moveTo(X(pts[i].t),Y(pts[i].mean));
+      ctx.stroke();
+    }
+    /* outcomes arrive */
+    const n = CF_N-1-CF_SPLIT, shown = t < CF_BAND ? 0 : Math.min(n, Math.floor((t-CF_BAND)/CF_PTS*n)+1);
+    let inside = 0;
+    for(let k=1;k<=shown;k++){
+      const p = pts[CF_SPLIT+k], ok = Math.abs(p.y-p.mean) <= q; if(ok) inside++;
+      ctx.beginPath(); ctx.arc(X(p.t), Y(p.y), ok?3:5, 0, Math.PI*2);
+      if(ok){ ctx.fillStyle = colors.ink; ctx.fill(); }
+      else { ctx.strokeStyle = colors.best; ctx.lineWidth = 2.5; ctx.stroke(); }
+    }
+    statusEl.textContent = shown ? `Coverage so far: ${inside} of ${shown} new observations inside the interval` : "";
+  }
+
+  /* ----- Mode 4: entity extraction from adverse-event reports ----- */
+  const REPORTS = [
+    [["Patient reported ",0],["persistent pelvic pain",2],[" and ",0],["bleeding",2],[" ",0],["three weeks after",3],[" ",0],["mesh implantation",1],[".",0]],
+    [["Started ",0],["sertraline",1],[" for low mood; developed ",0],["nausea",2],[" and ",0],["insomnia",2],[" ",0],["within two days",3],[".",0]],
+    [["At follow-up the ",0],["cardiac device",1],[" showed lead displacement; patient described ",0],["dizziness",2],[" ",0],["since last week",3],[".",0]]
+  ];
+  const NLP_TYPE = 1600, NLP_TAG = 1400, NLP_HOLD = 1600, NLP_EACH = NLP_TYPE+NLP_TAG+NLP_HOLD, NLP_DUR = NLP_EACH*REPORTS.length;
+  function nlpDraw(t){
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    t = Math.max(0, t || 0);
+    const idx = Math.max(0, Math.min(REPORTS.length-1, Math.floor(t/NLP_EACH))), lt = t - idx*NLP_EACH;
+    const pad = Math.max(20, W*.07), size = Math.max(17, Math.min(27, W/19)), lh = size*1.6;
+    ctx.fillStyle = colors.muted; ctx.font = font(500,12);
+    ctx.fillText(`Adverse-event report ${idx+1} of ${REPORTS.length} (illustrative)`, pad, pad);
+    /* tokenise into words keeping entity type */
+    const words = [];
+    REPORTS[idx].forEach(([txt,k],si) => txt.split(/(\s+)/).forEach(w => { if(w) words.push({w,k,si}); }));
+    ctx.font = `400 ${size}px Literata, Georgia, serif`;
+    let x = pad, y = pad + lh*1.4; const placed = [];
+    words.forEach(o => {
+      const wd = ctx.measureText(o.w).width;
+      if(!/^\s+$/.test(o.w) && !/^[.,;:]+$/.test(o.w) && x + wd > W - pad){ x = pad; y += lh; }
+      if(/^\s+$/.test(o.w) && x === pad) return;
+      placed.push({...o, x, y, wd}); x += wd;
+    });
+    const total = placed.reduce((a,o) => a + o.w.length, 0);
+    let chars = Math.floor(Math.min(1, lt/NLP_TYPE)*total);
+    const ents = [...new Set(placed.filter(o=>o.k).map(o=>o.si))];
+    const tagP = Math.max(0, Math.min(1, (lt-NLP_TYPE)/NLP_TAG));
+    const fill = {1:colors.accent, 2:colors.best, 3:colors.muted};
+    /* highlights */
+    placed.forEach((o,i) => {
+      if(!o.k) return;
+      const order = ents.indexOf(o.si), a = Math.max(0, Math.min(1, tagP*ents.length - order));
+      if(a <= 0) return;
+      const next = placed[i+1], join = next && next.si === o.si;
+      ctx.globalAlpha = (o.k===3 ? .22 : .28)*a; ctx.fillStyle = fill[o.k];
+      ctx.fillRect(o.x-2, o.y - size*1.02, o.wd + (join?0:4), size*1.42);
+    });
+    ctx.globalAlpha = 1; ctx.fillStyle = colors.ink;
+    placed.forEach(o => {
+      if(chars <= 0) return;
+      const part = o.w.slice(0, chars); chars -= o.w.length;
+      ctx.fillText(part, o.x, o.y);
+    });
+    /* structured output */
+    const outA = Math.max(0, Math.min(1, (lt-NLP_TYPE-NLP_TAG)/500));
+    if(outA > 0){
+      const groups = [[1,"Device or drug"],[2,"Adverse events"],[3,"Timing"]].map(([k,label]) => {
+        const vals = [...new Set(placed.filter(o=>o.k===k).map(o=>o.si))]
+          .map(si => REPORTS[idx][si][0]);
+        return [k,label,vals.join(", ")];
+      });
+      let oy = y + lh*1.5;
+      ctx.globalAlpha = outA; ctx.strokeStyle = colors.ink; ctx.globalAlpha = .2*outA;
+      ctx.beginPath(); ctx.moveTo(pad, oy - lh*.6); ctx.lineTo(W-pad, oy - lh*.6); ctx.stroke();
+      ctx.font = font(500,13);
+      const col = pad + Math.max(...groups.map(g => ctx.measureText(g[1]).width)) + 16;
+      groups.forEach(([k,label,val]) => {
+        ctx.globalAlpha = outA; ctx.fillStyle = colors.muted; ctx.font = font(500,13);
+        ctx.fillText(label, pad, oy);
+        ctx.fillStyle = colors.ink; ctx.font = font(500,14);
+        let v = val; while(v.length > 4 && ctx.measureText(v).width > W - pad - col) v = v.slice(0,-2);
+        ctx.fillText(v === val ? v : v + "…", col, oy);
+        oy += 26;
+      });
+      ctx.globalAlpha = 1;
+    }
+    /* legend */
+    const items = [[1,"Device or drug"],[2,"Adverse event"],[3,"Timing"]];
+    ctx.font = font(500,12); let lx = pad; const ly = H - pad;
+    items.forEach(([k,label]) => {
+      ctx.globalAlpha = k===3?.4:.55; ctx.fillStyle = fill[k]; ctx.fillRect(lx, ly-10, 12, 12);
+      ctx.globalAlpha = 1; ctx.fillStyle = colors.muted; ctx.fillText(label, lx+18, ly);
+      lx += 18 + ctx.measureText(label).width + 22;
+    });
+    if(tagP >= 1){
+      const c = k => new Set(placed.filter(o=>o.k===k).map(o=>o.si)).size;
+      const ae = c(2);
+      statusEl.textContent = `Extracted: ${ae} adverse event${ae>1?"s":""}, ${c(1)} device or drug, ${c(3)} timing`;
+    } else statusEl.textContent = "";
+  }
+
+  /* ----- Mode 5: a PINN converging to the heat equation solution ----- */
+  const PI_T = [0, 1, 2, 4], PI_DUR = 4800;
+  let PIN = null;
+  function pinnInit(){
+    PIN = PI_T.map(() => Array.from({length:3}, (_,j) => ({a:(Math.random()-.5)*.5, k:j+2+Math.floor(Math.random()*3), ph:Math.random()*Math.PI*2})));
+  }
+  const exact = (x,t) => Math.sin(Math.PI*x)*Math.exp(-Math.PI*Math.PI*0.05*t);
+  function pinnDraw(t){
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    const pad = 30, X = u => pad + u*(W-2*pad), Y = v => H - pad - (v+.15)/1.3*(H-2*pad);
+    const s = 1 - Math.pow(1 - Math.min(1, t/PI_DUR), 3), damp = (1-s)*(1-s);
+    ctx.strokeStyle = colors.ink; ctx.globalAlpha = .25; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(W-pad, Y(0)); ctx.stroke();
+    ctx.globalAlpha = 1; ctx.fillStyle = colors.muted; ctx.font = font(500,12);
+    ctx.fillText("Heat diffusion u(x, t): exact solution dashed, network solid", pad, pad*.7);
+    let res = 0;
+    PI_T.forEach((tt,ci) => {
+      ctx.strokeStyle = colors.ink; ctx.globalAlpha = .45; ctx.lineWidth = 1.2; ctx.setLineDash([5,4]); ctx.beginPath();
+      for(let i=0;i<=120;i++){ const x=i/120; i?ctx.lineTo(X(x),Y(exact(x,tt))):ctx.moveTo(X(x),Y(exact(x,tt))); }
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = colors.accent; ctx.globalAlpha = 1; ctx.lineWidth = 2.2; ctx.beginPath();
+      for(let i=0;i<=120;i++){
+        const x=i/120; let e=0; PIN[ci].forEach(m => e += m.a*Math.sin(m.k*Math.PI*x + m.ph));
+        e *= damp; res += e*e;
+        const v = exact(x,tt) + e;
+        i?ctx.lineTo(X(x),Y(v)):ctx.moveTo(X(x),Y(v));
+      }
+      ctx.stroke();
+      ctx.fillStyle = colors.muted; ctx.font = font(500,11);
+      ctx.fillText(`t = ${tt}`, X(.5)+6, Y(exact(.5,tt))-6);
+    });
+    /* boundary conditions u(0)=u(1)=0 */
+    ctx.fillStyle = colors.best;
+    [0,1].forEach(x => { ctx.beginPath(); ctx.arc(X(x), Y(0), 4.5, 0, Math.PI*2); ctx.fill(); });
+    const mse = res/(PI_T.length*121) + 1e-6;
+    const ep = Math.round(s*5000).toLocaleString("en-AU");
+    const [m,e] = mse.toExponential(1).split("e");
+    const sup = String(parseInt(e,10)).replace(/[-0-9]/g, c => "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"["-0123456789".indexOf(c)]);
+    statusEl.textContent = `Training epoch ${ep}: physics residual ${m} × 10${sup}`;
+  }
+
+  /* ----- control ----- */
+  function stop(){ cancelAnimationFrame(raf); raf=null; clearTimeout(timer); }
+  const TIMED = {
+    ortho:     {init: orthoInit, draw: orthoDraw, dur: HOLD+GLIDE},
+    conformal: {init: cfInit,    draw: cfDraw,    dur: CF_DUR},
+    nlp:       {init: () => {},  draw: nlpDraw,   dur: NLP_DUR},
+    pinn:      {init: pinnInit,  draw: pinnDraw,  dur: PI_DUR}
+  };
+  function timedLoop(now){
+    const m = TIMED[mode], t = Math.max(0, now - t0);
+    m.draw(Math.min(t, m.dur));
+    raf = t < m.dur ? requestAnimationFrame(timedLoop) : null;
   }
   function run(){
-    cancelAnimationFrame(raf); init();
-    if(reduce.matches){ while(iter<ITERS) step(); draw(); }
-    else { tick=0; raf = requestAnimationFrame(loop); }
+    stop();
+    captionEl.innerHTML = CAPTIONS[mode];
+    statusEl.textContent = "";
+    if(mode === "swarm"){
+      swarmInit();
+      if(reduce.matches){ while(iter<ITERS) swarmStep(); swarmDraw(); }
+      else raf = requestAnimationFrame(swarmLoop);
+      return;
+    }
+    const m = TIMED[mode]; m.init();
+    if(reduce.matches){
+      if(mode === "ortho"){ orthoDraw(APPEAR+500); timer = setTimeout(() => orthoDraw(m.dur), 2500); }
+      else m.draw(m.dur);
+    } else { t0 = performance.now(); raf = requestAnimationFrame(timedLoop); }
+  }
+  function redraw(){
+    if(raf) return;
+    mode === "swarm" ? swarmDraw() : TIMED[mode].draw(TIMED[mode].dur);
   }
   function resize(){
     const r = canvas.getBoundingClientRect();
@@ -553,11 +906,16 @@ document.getElementById("q").addEventListener("input", renderPubs);
     W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio||1, 2);
     canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
     ySpan = 2; xSpan = 2*W/H;
-    readColors(); buildContours(); draw();
+    readColors(); buildContours(); redraw();
   }
 
+  document.querySelectorAll(".modes button").forEach(b => b.addEventListener("click", () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll(".modes button").forEach(x => x.setAttribute("aria-pressed", String(x===b)));
+    run();
+  }));
   let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(resize, 120); }).observe(canvas);
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { readColors(); buildContours(); draw(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { readColors(); buildContours(); redraw(); });
   document.getElementById("rerun").addEventListener("click", run);
   resize(); run();
 })();
